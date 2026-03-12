@@ -12,15 +12,15 @@ Architecture:
 
 Current tool set:
 
-- `move_relative`
-- `move_by_distance`
-- `rotate_relative`
-- `sit_down`
-- `stand_up`
-- `stretch`
-- `dance`
-- `take_image`
-- `analyze_image`
+- `motion_move_timed`
+- `motion_move_distance`
+- `motion_rotate`
+- `posture_sit`
+- `posture_stand`
+- `posture_stretch`
+- `behavior_dance`
+- `vision_capture_image`
+- `vision_analyze_image`
 
 ## Layout
 
@@ -42,15 +42,15 @@ Go2-React-Controller/
     robot_runtime.py
     voice_runtime.py
     tools/
-      analyze_image.py
-      dance.py
-      move_by_distance.py
-      move_relative.py
-      rotate_relative.py
-      sit_down.py
-      stand_up.py
-      stretch.py
-      take_image.py
+      behavior_dance.py
+      motion_move_distance.py
+      motion_move_timed.py
+      motion_rotate.py
+      posture_sit.py
+      posture_stand.py
+      posture_stretch.py
+      vision_analyze_image.py
+      vision_capture_image.py
 ```
 
 ## Setup
@@ -147,7 +147,7 @@ RealSense captures are saved locally:
 - timestamped images in [run/captured_images](/home/unitree/Go2-React-Controller/run/captured_images)
 - latest capture at [run/captured_images/latest.jpg](/home/unitree/Go2-React-Controller/run/captured_images/latest.jpg)
 
-`take_image` captures one RealSense color frame and saves it locally. `analyze_image` defaults to the latest saved image if no path is provided.
+`vision_capture_image` captures one RealSense color frame and saves it locally. `vision_analyze_image` defaults to the latest saved image if no path is provided.
 
 ## Current Limits
 

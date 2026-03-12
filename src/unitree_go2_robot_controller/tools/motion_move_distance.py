@@ -9,7 +9,7 @@ from pydantic import BaseModel, Field
 from unitree_go2_robot_controller.robot_runtime import RobotRuntime
 
 
-class MoveByDistanceInput(BaseModel):
+class MotionMoveDistanceInput(BaseModel):
     direction: Literal["forward", "backward", "left", "right"] = Field(
         description="Short relative direction to move."
     )
@@ -22,9 +22,9 @@ class MoveByDistanceInput(BaseModel):
     )
 
 
-def create_move_by_distance_tool(runtime: RobotRuntime):
-    @tool("move_by_distance", args_schema=MoveByDistanceInput)
-    def move_by_distance(direction: str, distance_m: float, speed: float = 0.4) -> str:
+def create_motion_move_distance_tool(runtime: RobotRuntime):
+    @tool("motion_move_distance", args_schema=MotionMoveDistanceInput)
+    def motion_move_distance(direction: str, distance_m: float, speed: float = 0.4) -> str:
         """Move in a relative direction by distance using duration = distance / speed."""
         requested_distance_m = float(distance_m)
         if requested_distance_m <= 0:
@@ -64,4 +64,4 @@ def create_move_by_distance_tool(runtime: RobotRuntime):
             ensure_ascii=True,
         )
 
-    return move_by_distance
+    return motion_move_distance

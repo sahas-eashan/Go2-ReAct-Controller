@@ -12,7 +12,7 @@ from unitree_go2_robot_controller.robot_runtime import RobotRuntime
 ROTATION_DURATION_SCALE = 1.6
 
 
-class RotateRelativeInput(BaseModel):
+class MotionRotateInput(BaseModel):
     direction: Literal["left", "right"] = Field(
         default="left",
         description="Rotation direction.",
@@ -31,9 +31,9 @@ class RotateRelativeInput(BaseModel):
     )
 
 
-def create_rotate_relative_tool(runtime: RobotRuntime):
-    @tool("rotate_relative", args_schema=RotateRelativeInput)
-    def rotate_relative(
+def create_motion_rotate_tool(runtime: RobotRuntime):
+    @tool("motion_rotate", args_schema=MotionRotateInput)
+    def motion_rotate(
         direction: str = "left",
         duration_s: float = 2.0,
         angle_deg: float = 0.0,
@@ -79,4 +79,4 @@ def create_rotate_relative_tool(runtime: RobotRuntime):
             ensure_ascii=True,
         )
 
-    return rotate_relative
+    return motion_rotate

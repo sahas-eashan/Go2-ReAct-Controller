@@ -7,11 +7,11 @@ from langchain_core.tools import tool
 from unitree_go2_robot_controller.robot_runtime import RobotRuntime
 
 
-def create_dance_tool(runtime: RobotRuntime):
-    @tool("dance")
-    def dance() -> str:
+def create_behavior_dance_tool(runtime: RobotRuntime):
+    @tool("behavior_dance")
+    def behavior_dance() -> str:
         """Make the robot perform the standard dance action."""
         result = runtime.perform_action("dance")
         return json.dumps(result, ensure_ascii=True)
 
-    return dance
+    return behavior_dance

@@ -11,7 +11,7 @@ from pydantic import BaseModel, Field
 from unitree_go2_robot_controller.config import AppConfig
 
 
-class AnalyzeImageInput(BaseModel):
+class VisionAnalyzeImageInput(BaseModel):
     prompt: str = Field(description="Question or instruction for image analysis.")
     image_path: str = Field(
         default="",
@@ -19,11 +19,11 @@ class AnalyzeImageInput(BaseModel):
     )
 
 
-def create_analyze_image_tool(config: AppConfig):
+def create_vision_analyze_image_tool(config: AppConfig):
     client = OpenAI(api_key=config.openai_api_key)
 
-    @tool("analyze_image", args_schema=AnalyzeImageInput)
-    def analyze_image(prompt: str, image_path: str = "") -> str:
+    @tool("vision_analyze_image", args_schema=VisionAnalyzeImageInput)
+    def vision_analyze_image(prompt: str, image_path: str = "") -> str:
         """Analyze an image using a single multimodal OpenAI call."""
         selected_path = Path(image_path.strip() or config.robot_captured_image_path)
         if not selected_path.is_file():
@@ -78,4 +78,4 @@ def create_analyze_image_tool(config: AppConfig):
             ensure_ascii=True,
         )
 
-    return analyze_image
+    return vision_analyze_image

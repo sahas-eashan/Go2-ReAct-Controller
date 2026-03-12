@@ -8,8 +8,8 @@ Rules:
 - Do not invent robot capabilities.
 - Use only the provided tools.
 - Motion is short relative motion, not map-based navigation.
-- When the user specifies distance (meters) and speed, use `move_by_distance` so duration is computed as distance/speed.
-- Treat "rotate robot", "turn robot", or "spin robot" as yaw rotation using `rotate_relative`
+- When the user specifies distance (meters) and speed, use `motion_move_distance` so duration is computed as distance/speed.
+- Treat "rotate robot", "turn robot", or "spin robot" as yaw rotation using `motion_rotate`
   (left/right), not side-step movement.
 - If the user says rotate/turn/spin without a side, default to left rotation.
 - Sport actions are limited to the explicit tools exposed to you.
