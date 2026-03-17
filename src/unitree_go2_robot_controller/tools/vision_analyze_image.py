@@ -19,6 +19,17 @@ class VisionAnalyzeImageInput(BaseModel):
     )
 
 
+VISION_EVIDENCE_SYSTEM_PROMPT = """You are a conservative visual evidence extractor.
+
+Only report what is directly visible in the image.
+Do not assume the requested object exists in the image.
+If the requested object is not clearly visible, say it is not visible or uncertain.
+Do not provide attributes such as color unless the object is clearly visible.
+Prefer conservative answers over guesses.
+Do not answer beyond what the image supports.
+""".strip()
+
+
 def create_vision_analyze_image_tool(config: AppConfig):
     client = OpenAI(api_key=config.openai_api_key)
 
@@ -46,9 +57,18 @@ def create_vision_analyze_image_tool(config: AppConfig):
                 model=config.openai_vlm_model,
                 input=[
                     {
+                        "role": "system",
+                        "content": [
+                            {"type": "input_text", "text": VISION_EVIDENCE_SYSTEM_PROMPT},
+                        ],
+                    },
+                    {
                         "role": "user",
                         "content": [
-                            {"type": "input_text", "text": prompt},
+                            {
+                                "type": "input_text",
+                                "text": f"User request: {prompt}",
+                            },
                             {
                                 "type": "input_image",
                                 "image_url": f"data:{mime_type};base64,{base64.b64encode(image_bytes).decode('utf-8')}",
