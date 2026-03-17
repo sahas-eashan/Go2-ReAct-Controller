@@ -101,7 +101,7 @@ Install Go2 playback dependencies in this environment:
 Install instrumentation package in this venv:
 
 ```bash
-cd /home/unitree/Go2-React-Controller
+cd /home/unitree/Go2-ReAct-Controller
 source .venv/bin/activate
 pip install amp-instrumentation
 ```
@@ -127,7 +127,7 @@ amp-instrument unitree-go2-controller voice --interface eth0
 CLI debug mode over SSH:
 
 ```bash
-cd /home/unitree/Go2-React-Controller
+cd /home/unitree/Go2-ReAct-Controller
 source .venv/bin/activate
 set -a && source .env && set +a
 amp-instrument unitree-go2-controller cli --interface eth0
